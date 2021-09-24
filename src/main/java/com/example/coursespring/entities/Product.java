@@ -1,29 +1,36 @@
 package com.example.coursespring.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
+@Table(name="tb_product")
 public class Product implements Serializable {
 
     public static final Long serialVersionUID=1l;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String name;
     private String description;
     private Double price;
     private String imgUrl;
 
+    @ManyToMany
+    @JoinTable(name="tb_product_category",
+            joinColumns= @JoinColumn(name="product_id"),
+            inverseJoinColumns=@JoinColumn(name="category_id")
+    )
+    private Set<Category> categories= new HashSet<>();
+
     public Product (){}
 
-    public Product(Integer id, String name, String description, Double price, String imgUrl) {
+    public Product(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -31,11 +38,11 @@ public class Product implements Serializable {
         this.imgUrl = imgUrl;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -69,6 +76,10 @@ public class Product implements Serializable {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public Set<Category> getCategory() {
+        return categories;
     }
 
     @Override
