@@ -1,13 +1,13 @@
-package com.example.cousespring;
+package com.example.coursespring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CouseSpringApplication {
+public class CourseSpringApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CouseSpringApplication.class, args);
+        SpringApplication.run(CourseSpringApplication.class, args);
     }
 
 }
