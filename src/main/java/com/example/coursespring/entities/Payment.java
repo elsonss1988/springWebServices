@@ -1,42 +1,55 @@
 package com.example.coursespring.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
+@Table(name="tb_payment")
 public class Payment implements Serializable {
 
+    public static final Long serialVersionUID= 1l;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private Date moment;
+    private Long id;
+    private Instant moment;
+
+    @OneToOne
+    @MapsId
+    private Order order;
 
     public Payment(){}
 
-    public Payment(Integer id, Date moment) {
+    public Payment(Long id, Instant moment,Order order) {
         this.id = id;
         this.moment = moment;
+        this.order=order;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Date getMoment() {
+    public Instant getMoment() {
         return moment;
     }
 
-    public void setMoment(Date moment) {
+    public void setMoment(Instant moment) {
         this.moment = moment;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     @Override
