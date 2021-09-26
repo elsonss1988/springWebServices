@@ -15,6 +15,7 @@ public class OrderItem implements Serializable {
 
     public static final Long serialVersionUID=1L;
 
+    //Id Gerado na Juncao dos dois IDs
     @EmbeddedId
     private OrderItemPK id= new OrderItemPK();
     private Integer quantity;
@@ -23,8 +24,8 @@ public class OrderItem implements Serializable {
     public OrderItem(){}
 
     public OrderItem(Order order,Product product,Integer quantity, Double price) {
-        id.setOrder(order);
-        id.setProduct(product);
+        id.setOrder(order); //Baseado na Order do Objetos associado
+        id.setProduct(product); //Baseado no produto do Objetos associado
         this.quantity = quantity;
         this.price = price;
     }
@@ -74,7 +75,7 @@ public class OrderItem implements Serializable {
         return Objects.hash(id);
     }
 
-    public Double subTotal(){
+    public Double getSubTotal(){
         return getPrice()*getQuantity();
     }
 }
